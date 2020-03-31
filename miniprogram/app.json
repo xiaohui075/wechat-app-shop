@@ -1,14 +1,45 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/start/start",
+    "pages/index/index",
+    "pages/classific/classific",
+    "pages/shop-cart/index",
+    "pages/profile/profile"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "闪购",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/homepage.png",
+        "selectedIconPath": "images/homepage_activite.png"
+      },
+      {
+        "pagePath": "pages/classific/classific",
+        "text": "分类",
+        "iconPath": "images/classification.png",
+        "selectedIconPath": "images/classification_activite.png"
+      },
+      {
+        "pagePath": "pages/shop-cart/index",
+        "text": "购物车",
+        "iconPath": "images/shop_cart.png",
+        "selectedIconPath": "images/shop_cart_activite.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile_activie.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap40.json"
 }
