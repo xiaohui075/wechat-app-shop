@@ -1,2 +1,28 @@
 <!--index.wxml-->
-<view >首页</view>
+<view class="swiper-container">
+    <swiper indicator-dots="true" indicator-active-color="#fff" autoplay="true" circular="true">
+        <swiper-item wx:for="{{banners}}" wx:key="id">
+            <image mode="aspectFill" bindtap="imgClick" data-url="{{item.linkUrl}}" src="{{item.picUrl}}"></image>
+        </swiper-item>
+    </swiper>
+
+    <view class="search"> 
+        <input type="text" placeholder="输入搜索关键字" value="{{name}}" bindinput="bindinput"  bindconfirm="bindconfirm"></input>
+        <image src="/images/search.png"></image>
+    </view>
+</view>
+
+<view class="notice-box" wx:if="{{noticeList}}">
+      <view class="notice">
+          <image class="notice-icon" src="/images/notice.png"></image>
+          <swiper class="notic-swiper" vertical="true" autoplay="true" circular="true">
+                <navigator wx:for="{{noticeList.dataList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}">      
+                <swiper-item>
+                    <view class="notice-item">{{item.title}}</view>
+                </swiper-item>
+                </navigator>
+
+          </swiper>
+      </view>
+      <view class="more"><navigator url="/pages/notice/notice">更多</navigator></view>
+</view>

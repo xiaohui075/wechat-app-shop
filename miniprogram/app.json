@@ -4,7 +4,9 @@
     "pages/index/index",
     "pages/classific/classific",
     "pages/shop-cart/index",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/notice/notice",
+    "pages/notice/show"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -14,6 +16,10 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#6e6d6b",
+    "selectedColor": "#e64340",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
