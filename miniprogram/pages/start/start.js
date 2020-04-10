@@ -1,5 +1,6 @@
 // pages/start/start.js
 const WXAPI = require('apifm-wxapi')
+const CONFIG = require('../../config.js')
 var app = getApp()
 Page({
 
@@ -17,24 +18,37 @@ Page({
    */
   onLoad: function(options) {
     const _this = this;
-    WXAPI.banners({
-      type: 'app'
-    }).then(function(res) {
-      if (res.code == 0) {
-        _this.setData({
-          banners: res.data,
-          swiperMaxNumber: res.data.length
+    const app_show_pic_version = wx.getStorageSync('app_show_pic_version')
+    if (app_show_pic_version && app_show_pic_version==CONFIG.version){
+        if(CONFIG.shopMod==1){
+          wx.redirectTo({
+            url: '/pages/shop/select',
+          })
+        }else{
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        }
+    }else{
+        WXAPI.banners({
+          type: 'app'
+        }).then(function(res) {
+          if (res.code == 0) {
+            _this.setData({
+              banners: res.data,
+              swiperMaxNumber: res.data.length
+            })
+          } else {
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+          }
+        }).catch(function(e) {
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
         })
-      } else {
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
-      }
-    }).catch(function(e) {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    })
+    }
   },
 
   swiperChanger: function(e) {
@@ -53,6 +67,28 @@ Page({
   },
 
   goToIndex: function(e) {
+    if (app.globalData.isconnect){
+      wx.setStorage({
+        key: 'app_show_pic_version',
+        data: CONFIG.version,
+      })
+      if (CONFIG.shopMod==0){
+        //关闭其他所有页面，跳转到tabbar页面
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+      }else{
+        //关闭当前页面，跳转到应用其他页面，但不允许跳到tabbar页面
+        wx.redirectTo({
+          url: '/pages/shop/select',
+        })
+      }
+    }else{
+      wx.showToast({
+        title: '当前无网络',
+        icon:'none'
+      })
+    }
     wx.switchTab({
       url: '/pages/index/index',
     })

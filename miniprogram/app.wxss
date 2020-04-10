@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import 'weui/weui.wxss';
 .container {
   display: flex;
   flex-direction: column;
@@ -18,6 +19,10 @@ button::after{
   border: none;
 }
 
+.space {
+  height:20rpx;
+  background-color: #F2f2f2;
+}
 
 page {
   background: #f6f6f6;

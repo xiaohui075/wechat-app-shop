@@ -1,6 +1,8 @@
 //index.js
 const WXAPI = require('apifm-wxapi')
 const app = getApp()
+import api from '../../utils/api.js'
+import {newHouse} from '../../task/config.js'
 
 Page({
   data: {
@@ -11,20 +13,31 @@ Page({
     loadingMoreHidden: false,
     goods: [],
     categoryActiviteId: 0,
-    noticeList: {}
+    noticeList: {},
+    categories: [],
+    shopInfo:{}
   },
 
   onLoad: function() {
+    // api.getRequest(newHouse,true,'加载中').then(res => {
+    //   console.log(res)
+    // })
     //显示当前页面的转发按钮
     wx.showShareMenu({
       withShareTicket: true
     })
     const _this = this
     _this.initBanners(_this),
-    _this.getGoodsList(0),
-    this.getNoticeList()
+      _this.getCategories(),
+      _this.getGoodsList(0),
+      this.getNoticeList()
   },
 
+  onShow:function(e){
+    this.setData({
+      shopInfo:wx.getStorageSync('shopInfo')
+    })
+  },
   imgClick: function() {
     wx.showToast({
       title: '图片',
@@ -85,6 +98,21 @@ Page({
     })
   },
 
+  getCategories: function() {
+    WXAPI.goodsCategory().then(categoriesRes => {
+      console.log(categoriesRes);
+      if (categoriesRes.code == 0) {
+        this.setData({
+          categories: this.data.categories.concat(categoriesRes.data),
+          categoryActiviteId: 0,
+          curPage: 1
+        })
+      }
+    }).catch(err => {
+      console.log("err" + err)
+    })
+
+  },
   getNoticeList: function() {
     WXAPI.noticeList({
       pageSize: 5
@@ -116,5 +144,11 @@ Page({
     });
     this.getGoodsList(this.data.categoryActiviteId);
     wx.stopPullDownRefresh();
+  },
+  onReachBottom:function(){
+    this.setData({
+      curPage:this.data.curPage +1
+    })
+    this.getGoodsList(this.data.categoryActiviteId,true)
   }
 })

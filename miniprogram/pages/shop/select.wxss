@@ -1,0 +1,36 @@
+/* pages/shop/select.wxss */
+.search{
+  background: #eee;
+  position: relative;
+  padding: 16rpx
+}
+.search input{
+  background: #ffffff;
+  border-radius: 10rpx;
+  height: 70rpx;
+  padding-left: 56rpx;
+}
+.search .icon{
+  position: absolute;
+  width: 28rpx;
+  height: 28rpx;
+  top: 36rpx;
+  left: 40rpx
+}
+.shop-box{
+  margin-top: 15rpx;
+  display: flex
+}
+.shop-box text{
+  color: #666
+}
+.goToShop{
+  background: #FEB21C !important;
+  width: 700rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #ffffff !important;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}

@@ -1,0 +1,7 @@
+<view class="search">
+    <image class="icon" src="/images/icon/search.svg"></image>
+    <input placeholder="请输入门店" bindinput="searchInput" bindconfirm="searchConfirm"></input>
+</view>
+<view class="shop-box" wx:for="{{shops}}" wx:key="id">
+    <button wx:if="{{index==0}}" type="default" data-idx="{{index}}" class="goToShop" bindtap="toIndex">进入门店</button>
+</view>

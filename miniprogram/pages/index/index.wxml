@@ -1,4 +1,15 @@
-<!--index.wxml-->
+<navigator url="/pages/shop/select">
+    <view class="shops-container" wx:if="{{shopInfo}}">
+        <view class="l">
+            <image src="/images/icon-address.png"></image>
+        </view>
+        <text>{{shopInfo.name}}</text>
+        <view class="r">
+          <text>切换门店</text>
+          <image src="/images/next.png"></image>
+        </view>
+    </view>
+</navigator>
 <view class="swiper-container">
     <swiper indicator-dots="true" indicator-active-color="#fff" autoplay="true" circular="true">
         <swiper-item wx:for="{{banners}}" wx:key="id">
@@ -25,4 +36,39 @@
           </swiper>
       </view>
       <view class="more"><navigator url="/pages/notice/notice">更多</navigator></view>
+</view>
+
+<view class="category-box">
+  <view class="category-list" wx:for="{{categories}}" wx:key="id">
+      <view class="category-column {{categoryActiviteId == item.id ?'type-item-on':''}}">
+      <image class="category-imgbox" mode="aspectFill" src="{{item.icon}}"></image>
+      <view class="category-title">{{item.name}}</view>
+      </view>
+  </view>
+</view>
+
+<view class="container">
+    <view class="space"></view>
+    <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">商品列表</view>
+    </view>
+    <view class="goods-container">
+        <view class="goods-box" wx:for="{{goods}}" bindtap="goToDetailTap" wx:key="index" data-id="{{item.id}}">
+            <view class="img-box">
+                <image class="image" mode="aspectFill" src="{{item.pic}}" lazy-load="true"></image>
+            </view>
+            <view class="goods-title">{{item.name}}</view>
+            <view style="display:flex">
+              <view class="goods-price">¥ {{item.minPrice}}</view>
+              <view wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="goods-price" style='color:#aaa;text-decoration:line-through'>¥ {{item.originalPrice}}</view>
+            </view>
+        </view>
+    </view>
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="weui-loadmore weui-loadmore_line" style='margin-top:60rpx;margin-bottom:30rpx;'>
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多啦</view>
+    </view>
+</view>
+
+<view class="coupons-float" bindtap="goToCoupons">
+  <image src="/images/store.png"></image>
 </view>

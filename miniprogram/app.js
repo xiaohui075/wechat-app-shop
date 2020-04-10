@@ -60,6 +60,7 @@ App({
 
   },
 
+
   goStartIndexPage: function() {
     setTimeout(function() {
       wx.redirectTo({
@@ -70,7 +71,11 @@ App({
 
   globalData: {
     isconnect: true,
-    vipLevel: 0
+    vipLevel: 0,
+    userInfo:null,
+    loginCode:null,
+    version:'1.0.0',
+    host:'http://app2.wofang.com/api/'
   },
 
 })
